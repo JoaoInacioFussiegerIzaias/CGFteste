@@ -10,11 +10,13 @@ Rails.application.routes.draw do
 
   get  "/blogs/:id/edit", to: "blogs#edit", as: "edit_blog"
 
-  post "/blogs/:id", to: "blogs#update", as: "update_blog"
+  patch "/blogs/:id", to: "blogs#update", as: "update_blog"
 
   delete "/blogs/delete/:id", to: "blogs#destroy", as: "delete_blog"
 
   root "main#index"
+
+  resource "blog_arquivos", as: "blog_arquivos"
 end
 
 # Defines the root path route ("/")

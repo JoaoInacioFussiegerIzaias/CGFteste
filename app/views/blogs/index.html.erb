@@ -2,19 +2,58 @@
 <h1 class="text-4xl">Lista de Blogs</h1>
 </div>
 
-<div class="">
-  <%= link_to "Criar Novo Blog", new_blog_path %>
+<div class="mt-8">
+  <%= link_to "Criar Novo Blog", new_blog_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"%>
 </div>
-<ul>
+
+<ul class="mt-8">
+  <% if @blogs.present? %>
   <% @blogs.each do |blog| %>
-    <li>
+    <li >
       <h2><%= blog.titulo %></h2>
       <p><%= blog.descricao %></p>
-
-      <%= link_to "Ver", blog_path(blog), class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700" %> |
-      <%= link_to "Editar", edit_blog_path(blog), class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"%> |
-      <%= button_to "Excluir Blog", delete_blog_path(blog), method: :delete, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"%>
     </li>
+    <div class="mt-8">
+        <%= link_to "Ver", blog_path(blog), class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-8" %> |
+        <%= link_to "Editar", edit_blog_path(blog), class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"%>
+    </div>
+    <div class="mt-8">
+        <%= button_to "Excluir Blog", delete_blog_path(blog), method: :delete, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"%>
+    </div>
   <% end %>
+    <% end %>
 </ul>
 
+<%= render partial: "shared/loader" %>
+
+<script>
+    $(document).ready(function() {
+        // Função para carregar o partial do loader
+        function loadLoader() {
+            $.get("loader.html", function(data) {
+                $("body").append(data); // Adiciona o loader no body
+            });
+        }
+
+        // Função para remover o loader após o carregamento da requisição
+        function removeLoader() {
+            $("#loader").fadeOut(300, function() {
+                $(this).remove(); // Remove o loader do DOM
+            });
+        }
+
+        // Função para carregar o conteúdo via AJAX
+        $.ajax({
+            url: "blogs", // URL de onde os dados serão carregados
+            beforeSend: function() {
+                loadLoader(); // Mostra o loader antes de fazer a requisição
+            }
+        }).done(function(response) {
+            $("#content").html(response); // Coloca o conteúdo carregado na div #content
+            removeLoader(); // Remove o loader quando a requisição terminar
+        }).fail(function() {
+            alert("Erro ao carregar o conteúdo.");
+            removeLoader(); // Remove o loader em caso de erro
+        });
+    });
+</script>

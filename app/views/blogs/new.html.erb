@@ -1,21 +1,52 @@
-<%= form_with model: @blog, local: true do |form| %>
-  <div>
-    <%= form.label :titulo, "Título do Blog" %>
-    <%= form.text_field :titulo %>
-  </div>
+<div>
+  <%= render partial: "form" %>
+</div>
 
-  <div>
-    <%= form.label :descricao, "Descrição do Blog" %>
-    <%= form.text_area :descricao %>
-  </div>
+<script>
+    $(document).ready(function() {
+        // Função para carregar o partial do loader
+        function loadLoader() {
+            // Verifique se o loader já não foi inserido antes
+            if ($("#loader").length === 0) {
+                $.get("loader.html", function(data) {
+                    $("body").append(data); // Adiciona o loader no body
+                });
+            }
+        }
 
-  <div>
-    <%= form.submit "Criar Blog" %>
-  </div>
+        // Função para remover o loader após o carregamento da requisição
+        function removeLoader() {
+            $("#loader").fadeOut(300, function() {
+                $(this).remove(); // Remove o loader do DOM
+            });
+        }
 
-  <% if @blog.persisted? %>
-    <div>
-      <%= link_to "Editar Blog", edit_blog_path(@blog) %>
-    </div>
-  <% end %>
-<% end %>
+        // Enviar o formulário via AJAX
+        $('#blog_form').on('submit', function(event) {
+            event.preventDefault(); // Previne o envio padrão do formulário
+
+            // Mostrar o loader APÓS o formulário ser enviado
+            loadLoader();
+
+            var formData = $(this).serialize(); // Serializa os dados do formulário
+
+            $.ajax({
+                url: $(this).attr('blogs'), // A URL para enviar o formulário
+                type: $(this).attr('post'), // O método (GET ou POST)
+                data: formData, // Os dados do formulário
+                success: function(response) {
+                    // O que fazer quando o formulário for enviado com sucesso
+                    $('#content').html(response); // Exibe a resposta (por exemplo, uma página de sucesso)
+                    removeLoader(); // Remove o loader
+                },
+                error: function(xhr, status, error) {
+                    // O que fazer em caso de erro
+                    alert("Erro ao enviar o formulário: " + error);
+                    removeLoader(); // Remove o loader
+                }
+            });
+        });
+    });
+</script>
+
+

@@ -6,11 +6,13 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
+    @blog_arquivos = @blog.blog_arquivos
   end
 
 
   def new
     @blog = Blog.new
+    @blog.blog_arquivos.build
   end
 
   def create
@@ -19,7 +21,8 @@ class BlogsController < ApplicationController
     if @blog.save
       redirect_to blogs_path
     else
-      render 'new'
+      flash[:notice] = "erro"
+      render 'blogs/index'
     end
   end
 
@@ -39,6 +42,7 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog = Blog.find(params[:id])
+    @blog_arquivos = @blog.blog_arquivos
 
     if @blog.destroy
       redirect_to blogs_path
@@ -47,11 +51,10 @@ class BlogsController < ApplicationController
     end
   end
 
-
   private
 
   def blog_params
-    params.require(:blog).permit(:titulo, :descricao)
+    params.require(:blog).permit(:titulo, :descricao, blog_aquivos_attributes: [:id, :titulo, :descricao, :imagem, :_destroy])
   end
 
 end

@@ -1,0 +1,30 @@
+<%= form_for @blog, html: { multipart: true }, local: true do |form| %>
+  <%= hidden_field_tag :locale, params[:locale] %>
+
+  <div>
+    <%= form.label :titulo, "Título do Blog" %>
+    <%= form.text_field :titulo %>
+  </div>
+
+  <div>
+    <%= form.label :descricao, "Descrição do Blog" %>
+    <%= form.text_area :descricao %>
+  </div>
+
+  <div>
+    <%= form.fields_for :blog_arquivos do |f| %>
+      <%= render partial: "blog_arquivos_fields", locals: { f: f } %>
+    <% end %>
+  </div>
+
+  <div id="blog_from">
+    <%= form.submit "Criar Blog"%>
+  </div>
+
+  <% if @blog.persisted? %>
+    <div>
+      <%= link_to "Editar Blog", edit_blog_path(@blog) %>
+    </div>
+  <% end %>
+<% end %>
+
