@@ -1,12 +1,17 @@
 class BlogsController < ApplicationController
-
+  before_action :authenticate_user!
   def index
     @blogs = Blog.all
   end
 
   def show
-    @blog = Blog.find(params[:id])
-    @blog_arquivos = @blog.blog_arquivos
+    @blog = Blog.find_by(id: params[:id])
+
+    if @blog.present?
+      redirect_to blog_path(@blog)
+    else
+      redirect_to blogs_path, alert: "Blog não encontrado."
+    end
   end
 
 
@@ -22,7 +27,7 @@ class BlogsController < ApplicationController
       redirect_to blogs_path
     else
       flash[:notice] = "erro"
-      render 'blogs/index'
+      redirect_to blogs_path
     end
   end
 
@@ -42,7 +47,8 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog = Blog.find(params[:id])
-    @blog_arquivos = @blog.blog_arquivos
+
+    @blog.blog_arquivos.destroy_all
 
     if @blog.destroy
       redirect_to blogs_path
@@ -54,7 +60,7 @@ class BlogsController < ApplicationController
   private
 
   def blog_params
-    params.require(:blog).permit(:titulo, :descricao, blog_aquivos_attributes: [:id, :titulo, :descricao, :imagem, :_destroy])
+    params.require(:blog).permit(:titulo, :descricao, blog_arquivos_attributes: [:id, :titulo, :descricao,{ imagem:[]}, :_destroy])
   end
 
 end

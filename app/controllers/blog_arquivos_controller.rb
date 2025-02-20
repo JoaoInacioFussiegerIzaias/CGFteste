@@ -7,9 +7,9 @@ class BlogArquivosController < ApplicationController
     @blog_arquivo = @blog.blog_arquivos.new(blog_arquivo_params)
 
     if @blog_arquivo.save
-      redirect_to @blog, notice: 'Arquivo de imagem adicionado com sucesso.'
+      redirect_to blogs_path, notice: 'Arquivo de imagem adicionado com sucesso.'
     else
-      render 'blogs/show', alert: 'Erro ao adicionar arquivo.'
+      redirect_to blogs_path, alert: 'Erro ao adicionar arquivo.'
     end
   end
 

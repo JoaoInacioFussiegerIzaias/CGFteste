@@ -1,7 +1,11 @@
-<%= @blog_arquivo.each do |ba| %>
+<% @blog_arquivos.each do |ba| %>
 
   <p><%= ba.id.to_s %></p>
   <p><%= ba.titulo%></p>
-  <p><%= ba.descrisao %></p>
+  <p><%= ba.descricao %></p>
+
+  <% if ba.imagem.attached? %>
+    <%= image_tag url_for(ba.imagem), alt: "Imagem do arquivo #{ba.titulo}" %>
+  <% end %>
 
 <% end %>

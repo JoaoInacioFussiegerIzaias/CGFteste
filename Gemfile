@@ -63,3 +63,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Para criação de user/admin
+gem "devise", "~> 4.9"

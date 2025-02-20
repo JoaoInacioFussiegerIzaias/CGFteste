@@ -1,14 +1,19 @@
-<%= f.hidden_field :_destroy, value: 0 %>
-<div>
-  <%= f.label :titulo %>
-  <%= f.text_field :titulo %>
+
+<!-- Titulo da imagem -->
+<div class="relative z-0 w-full mb-5 group mt-6">
+  <%= form.text_field :titulo, class: "peer block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600", placeholder: " " %>
+  <%= form.label :titulo, "Título da Foto/Imagem", class: "peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]" %>
 </div>
 
-<div>
-  <%= f.label :descricao %>
-  <%= f.text_area :descricao %>
+<!-- Descrição da imagem -->
+<div class="relative z-0 w-full mb-5 group">
+  <%= form.text_area :descricao, class: "peer block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600", placeholder: " " %>
+  <%= form.label :descricao, "Descrição da Foto/Imagem", class: "peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]" %>
 </div>
-<div>
-  <%= f.label :imagem %>
-  <%= f.file_field :imagem %>
+
+<!--Uploader da imagem -->
+<div class="relative z-0 w-full mb-5 group mt-6">
+  <%= form.label :imagens, "Upload de Fotos/Imagens", class: "block mb-2 text-sm font-medium text-gray-900 " %>
+  <%= form.file_field :imagens, multiple: true, name: "blog[imagens][]", class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer" %>
 </div>
+
