@@ -1,30 +1,36 @@
-<div class="">
-<h1 class="text-4xl">Lista de Blogs</h1>
-</div>
+<div class="p-6 max-w-4xl mx-auto item-center">
+  <!-- Título e botão para criar novo blog -->
+  <h1 class="text-4xl font-semibold text-gray-900 mb-6">Lista de Blogs</h1>
+  <%= link_to "Criar Novo Blog", new_blog_path, class: "inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-8" %>
 
-<div class="mt-8">
-  <%= link_to "Criar Novo Blog", new_blog_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"%>
-</div>
+  <!-- Lista de Blogs -->
+  <ul class="space-y-6">
+    <% if @blogs.present? %>
+      <% @blogs.each do |blog| %>
+        <li class="p-4 border border-gray-300 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-2"><%= blog.titulo %></h2>
+          <p class="text-gray-700 mb-4"><%= blog.descricao %></p>
 
-<ul class="mt-8">
-  <% if @blogs.present? %>
-  <% @blogs.each do |blog| %>
-    <li >
-      <h2><%= blog.titulo %></h2>
-      <p><%= blog.descricao %></p>
-    </li>
-    <div class="mt-8">
-        <%= link_to "Ver", blog_path(blog), class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-8" %> |
-        <%= link_to "Editar", edit_blog_path(blog), class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"%>
-    </div>
-    <div class="mt-8">
-        <%= button_to "Excluir Blog", delete_blog_path(blog), method: :delete, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"%>
-    </div>
-  <% end %>
+          <!-- Links de Ações -->
+          <div class="flex space-x-4 mb-4">
+            <%= link_to "Ver", blog_path(blog), class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+            <%= link_to "Editar", edit_blog_path(blog), class: "bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600" %>
+          </div>
+
+          <!-- Botão para excluir -->
+          <div>
+            <%= button_to "Excluir Blog", delete_blog_path(blog), method: :delete, class: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" %>
+          </div>
+        </li>
+      <% end %>
+    <% else %>
+      <p class="text-gray-600">Nenhum blog encontrado.</p>
     <% end %>
-</ul>
+  </ul>
+</div>
 
 <%= render partial: "shared/loader" %>
+
 
 <script>
     $(document).ready(function() {

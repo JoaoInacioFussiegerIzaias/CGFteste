@@ -5,10 +5,15 @@ class BlogsController < ApplicationController
   end
 
   def show
+    # busca um objeto Blog no banco
     @blog = Blog.find_by(id: params[:id])
 
+    # acessa a associação entre o modelo Blog e o modelo BlogArquivo
+    @blog_arquivos = @blog.blog_arquivos
+
+    # Este if verifica se a variável @blog não é nil ou vazio.
     if @blog.present?
-      redirect_to blog_path(@blog)
+      render "show"
     else
       redirect_to blogs_path, alert: "Blog não encontrado."
     end
