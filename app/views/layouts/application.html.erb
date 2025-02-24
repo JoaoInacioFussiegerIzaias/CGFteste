@@ -30,18 +30,14 @@
   </head>
 
   <body>
-    <div class="">
+  <div class="flex-col">
       <%= render partial: "shared/navbar" %>
-        <div class="grid grid-cols-1 md:grid-cols-4">
-          <!-- Sidebar -->
-          <%= render partial: "shared/sidebar" %>
-
-          <!-- Conteúdo principal -->
-          <%= render partial: "shared/flash" %>
-          <%= yield %>
-        </div>
+    <div class="flex justify-center">
+        <%= render partial: "shared/sidebar" %>
+        <%= render partial: "shared/flash" %>
+        <%= yield %>
     </div>
+  </div>
   </body>
+
 </html>
-
-

@@ -1,11 +1,15 @@
-<% @blog_arquivos.each do |ba| %>
+<div class="container">
+<% @blog.blog_arquivos.each do |ba| %>
 
   <p><%= ba.id.to_s %></p>
   <p><%= ba.titulo%></p>
   <p><%= ba.descricao %></p>
 
-  <% if ba.imagem.attached? %>
-    <%= image_tag url_for(ba.imagem), alt: "Imagem do arquivo #{ba.titulo}" %>
+  <% if ba.imagens.attached? %>
+    <% ba.imagens.each do |imagem| %>
+      <%= image_tag imagem, alt: ba.titulo %>
+      <%= link_to 'Baixar Imagem', rails_blob_path(imagem, disposition: 'attachment'), target: '_blank' %>
+    <% end %>
   <% end %>
-
 <% end %>
+</div>

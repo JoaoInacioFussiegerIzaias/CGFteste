@@ -65,7 +65,16 @@ class BlogsController < ApplicationController
   private
 
   def blog_params
-    params.require(:blog).permit(:titulo, :descricao, blog_arquivos_attributes: [:id, :titulo, :descricao,{ imagem:[]}, :_destroy])
+    params.require(:blog).permit(
+      :titulo,
+      :descricao,
+      blog_arquivos_attributes: [
+        :id,
+        :titulo,
+        :descricao,
+        :_destroy,
+        { imagens: [] }
+      ]
+    )
   end
-
 end

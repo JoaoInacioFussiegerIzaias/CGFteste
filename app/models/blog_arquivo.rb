@@ -1,7 +1,6 @@
 class BlogArquivo < ApplicationRecord
   # Permições e Acossiações
   belongs_to :blog
-  has_one_attached :imagem
   has_many_attached :imagens
 
   # Validations
