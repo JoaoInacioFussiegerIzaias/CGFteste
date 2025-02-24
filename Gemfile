@@ -18,6 +18,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem "image_processing", ">= 1.2"
+gem 'selenium-webdriver', '4.29.1'
 
 gem 'stringio', '3.1.3'
 
@@ -63,7 +64,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem 'selenium-webdriver', '4.29.0'
+
 
 end
 
