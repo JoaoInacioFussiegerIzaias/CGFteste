@@ -18,7 +18,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "image_processing", ">= 1.2"
 gem "selenium-webdriver", "4.29.1"
-gem "stringio", "3.1.3"
+gem "stringio", "3.1.5"
 
 #para adicionar uma 'Avatar/Foto de perfio'
 gem 'carrierwave', '~> 3.1.1'
