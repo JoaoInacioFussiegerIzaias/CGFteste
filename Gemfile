@@ -20,6 +20,8 @@ gem "image_processing", ">= 1.2"
 gem "selenium-webdriver", "4.29.1"
 gem "stringio", "3.1.3"
 
+#para adicionar uma 'Avatar/Foto de perfio'
+gem 'carrierwave', '~> 3.1.1'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"

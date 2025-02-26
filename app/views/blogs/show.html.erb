@@ -1,3 +1,4 @@
+<div class="p-6 max-w-4xl mx-auto" id="show_blog">
 <h1><%= @blog.titulo%></h1>
 <p><%= @blog.descricao %></p>
 
@@ -5,4 +6,18 @@
 
 <%= link_to "Editar", edit_blog_path(@blog) %> |
 <%= link_to "Voltar para Lista", blogs_path %> |
+</div>
 
+<script>
+   var xml = new XMLHttpRequest();
+
+    xml.onreadystatechange = function (){
+        if (xml.readyState == 4){
+            console.log(xml)
+        }
+    }
+
+   xml.open("GET", "loader.html");
+   xml.send();
+
+</script>

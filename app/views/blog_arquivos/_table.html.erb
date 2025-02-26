@@ -1,8 +1,7 @@
 <div class="container">
 <% @blog.blog_arquivos.each do |ba| %>
 
-  <p><%= ba.id.to_s %></p>
-  <p><%= ba.titulo%></p>
+  <h1><%= ba.titulo%></h1>
   <p><%= ba.descricao %></p>
 
   <% if ba.imagens.attached? %>

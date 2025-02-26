@@ -9,7 +9,10 @@ class BlogsController < ApplicationController
     @blog = Blog.find_by(id: params[:id])
 
     # acessa a associação entre o modelo Blog e o modelo BlogArquivo
+
     @blog_arquivos = @blog.blog_arquivos
+
+
 
     # Este if verifica se a variável @blog não é nil ou vazio.
     if @blog.present?
