@@ -1,21 +1,24 @@
-<h1>Editar Blog</h1>
+<div class="max-w-4xl mx-auto flex-1">
+  <h1 class="text-4xl font-semibold text-gray-900 mb-6">Editar Blog</h1>
 
-<%= form_with model: @blog, local: true do |form| %>
-  <div>
-    <%= form.label :titulo, "Título do Blog" %>
-    <%= form.text_field :titulo %>
+  <div class="max-w-4xl mx-auto flex-col">
+    <%= form_with model: @blog, local: true do |form| %>
+      <div class="mb-4">
+        <%= form.label :titulo, "Título do Blog", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.text_field :titulo, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <div class="mb-4">
+        <%= form.label :descricao, "Descrição do Blog", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.text_area :descricao, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <div>
+        <%= form.submit "Atualizar Blog", class: "px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-full" %>
+      </div>
+    <% end %>
+
+    <%= link_to "Cancelar", blogs_path, class: "mt-4 inline-block text-sm font-medium text-blue-700 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
   </div>
 
-  <div>
-    <%= form.label :descricao, "Descrição do Blog" %>
-    <%= form.text_area :descricao %>
-  </div>
-
-  <div>
-    <%= form.submit "Atualizar Blog" %>
-  </div>
-<% end %>
-
-
-
-<%= link_to "Cancelar", blogs_path, class: "btn btn-secondary" %>
+</div>
